@@ -86,7 +86,7 @@
         
         /* ヘッダー */
         header {
-            background-color: var(--white);
+            background-color: var(--main-color);
             box-shadow: var(--shadow);
             position: fixed;
             top: 0;
@@ -107,15 +107,18 @@
             align-items: center;
         }
         
-        .logo img {
-            width: 192px;
-            height: 40px;
+        .logo a {
+            font-size: 2.4rem;
+            font-weight: 700;
+            color: var(--white);
+            text-decoration: none;
+            line-height: 1.2;
         }
         
         .logo-text {
             font-size: 2.4rem;
             font-weight: 700;
-            color: var(--main-color);
+            color: var(--white);
         }
         
         .nav-links {
@@ -130,12 +133,12 @@
         .nav-links a {
             font-weight: 500;
             font-size: 1.6rem;
-            color: var(--text-color);
+            color: var(--white);
             transition: var(--transition);
         }
         
         .nav-links a:hover {
-            color: var(--accent-color);
+            color: var(--gray-light);
         }
         
         .cta-button {
@@ -168,7 +171,7 @@
             background: none;
             border: none;
             font-size: 2.4rem;
-            color: var(--main-color);
+            color: var(--white);
         }
         
         /* ヒーローセクション */
@@ -861,7 +864,7 @@
         <div class="container header-container">
             <div class="logo">
                 <a href="/">
-                    <img src="https://gempo.info/common/logo.svg" alt="現場ポケットロゴ" width="192" height="40">
+                    現場ポケット 勤怠管理機能
                 </a>
             </div>
             
@@ -898,7 +901,7 @@
     <section class="problems" id="problems">
         <div class="container">
             <h2 class="section-title fade-in visible">現場の時間管理、こんな悩みありませんか？</h2>
-            <p class="section-subtitle fade-in">多くの経営者様が抱える「現場の時間管理」に関する課題を解決します</p>
+            <p class="section-subtitle fade-in">多くの経営者様が抱える「現場の労働時間管理」に関する課題を解決します</p>
             
             <div class="problems-grid">
                 <div class="problem-card fade-in">
@@ -985,8 +988,8 @@
     <!-- 機能紹介セクション -->
     <section class="features" id="features">
         <div class="container">
-            <h2 class="section-title fade-in">現場ポケットが時間管理と給与計算の悩みを解決！</h2>
-            <p class="section-subtitle fade-in">スマホで労働時間も法律対応も給与も管理。</p>
+            <h2 class="section-title fade-in">現場ポケットで労働時間管理と給与計算の悩みを解決！</h2>
+            <p class="section-subtitle fade-in">専用機器不要なのでスマホで労働時間も法律対応も給与も管理できます。</p>
             
             <div class="features-grid">
                 <div class="feature-card fade-in">
@@ -995,7 +998,7 @@
                     </div>
                     <div class="feature-content">
                         <h3 class="feature-title">スマホで簡単打刻</h3>
-                        <p class="feature-description">現場のスマホからワンタップで勤怠打刻が可能。出勤・退勤時間を自動で記録し、打刻忘れを防ぐアラート機能も搭載。GPS位置情報と連動して、正確な現場の労働時間を記録します。</p>
+                        <p class="feature-description">現場のスマホからワンタップで勤怠打刻が可能。出勤・退勤時間を自動で記録し、打刻忘れを防ぐアラート機能も搭載。</p>
                     </div>
                 </div>
                 
@@ -1015,7 +1018,7 @@
                     </div>
                     <div class="feature-content">
                         <h3 class="feature-title">労働時間の可視化</h3>
-                        <p class="feature-description">労働時間や残業時間を分かりやすく表示。リアルタイムで各従業員や現場の労働状況を把握できるため、過剰労働の防止や効率的な人員配置が可能になります。</p>
+                        <p class="feature-description">労働時間や残業時間を分かりやすく表示。各従業員や現場の労働状況を把握できるため、過剰労働の防止や効率的な人員配置が可能になります。</p>
                     </div>
                 </div>
                 
@@ -1045,7 +1048,7 @@
                     </div>
                     <div class="feature-content">
                         <h3 class="feature-title">帳票出力</h3>
-                        <p class="feature-description">労働基準法で定められた各種帳票や記録をボタン一つで出力可能。労働基準監督署の調査にも即座に対応できるよう、必要な書類を常に最新の状態で準備します。</p>
+                        <p class="feature-description">労働基準法で定められた各種帳票や記録を簡単に出力可能。法令に基づく情報開示の要請にも円滑に対応できます。</p>
                     </div>
                 </div>
                 
@@ -1065,7 +1068,7 @@
                     </div>
                     <div class="feature-content">
                         <h3 class="feature-title">モバイル対応</h3>
-                        <p class="feature-description">スマートフォンやタブレットからも閲覧可能。多忙な経営者の方でも外出先から打刻状況の確認が迅速に行えます。</p>
+                        <p class="feature-description">スマートフォンやタブレットからも入力・閲覧可能。多忙な経営者の方でも外出先から打刻状況の確認が迅速に行えます。</p>
                     </div>
                 </div>
             </div>
@@ -1083,7 +1086,7 @@
                         <i class="fas fa-rocket"></i>
                     </div>
                     <h3 class="reason-title">簡単導入・すぐに使える</h3>
-                    <p class="reason-description">専用機器の購入や複雑な設定は不要。アプリをダウンロードするだけですぐに利用開始できます。現場スタッフも直感的に操作できるシンプルなインターフェースで、導入研修も最小限で済みます。</p>
+                    <p class="reason-description">専用機器の購入や複雑な設定は不要。アプリをダウンロードするだけですぐに利用開始できます。現場スタッフも直感的に操作できるシンプルなインターフェースで導入の負担も心配なし。</p>
                 </div>
                 
                 <div class="reason-card fade-in">
@@ -1091,7 +1094,7 @@
                         <i class="fas fa-shield-alt"></i>
                     </div>
                     <h3 class="reason-title">法律遵守の負担を軽減</h3>
-                    <p class="reason-description">労働時間管理に関する法律を自動でチェック。法令違反のリスクを未然に防ぎ、コンプライアンス体制を強化します。定期的なアップデートで常に最新の法令に対応し、経営者の法的リスクを軽減します。</p>
+                    <p class="reason-description">労働時間管理に関する法律を自動でチェック。法令違反のリスクを未然に防ぎ、コンプライアンス体制を強化します。定期的なアップデートで法令に対応し、法的リスクを軽減します。</p>
                 </div>
                 
                 <div class="reason-card fade-in">
@@ -1099,7 +1102,7 @@
                         <i class="fas fa-hourglass-half"></i>
                     </div>
                     <h3 class="reason-title">時間とコストを大幅削減</h3>
-                    <p class="reason-description">勤怠管理から給与計算までの一連の作業を自動化することで、管理業務にかかる時間を削減。人的ミスも防止し、本来の経営業務や事業拡大に集中できる環境を実現します。</p>
+                    <p class="reason-description">勤怠管理から給与計算までの一連の作業を自動化することで、管理業務にかかる時間を削減。人的ミスも防止し、本来の業務に集中できる環境を実現します。</p>
                 </div>
             </div>
         </div>
