@@ -1,0 +1,1337 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta name="robots" content="noindex">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>現場ポケット | 塗装業向け勤怠管理・給与計算システム</title>
+    <!-- メタタグ -->
+    <meta name="description" content="塗装業向け勤怠管理・給与計算システム「現場ポケット」。2024年4月からの労働時間管理に対応。スマホで簡単打刻、給与計算も自動化。月額4,800円でユーザー数無制限。">
+    <meta name="keywords" content="塗装業,勤怠管理,給与計算,労働時間管理,現場ポケット,36協定管理">
+    
+    <!-- ファビコン -->
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    
+    <!-- フォント -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+    <!-- インラインCSS -->
+    <style>
+        /* リセットCSS */
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        /* 基本設定 */
+        :root {
+            --main-color: #0066cc; /* メインカラー：信頼感を演出する青 */
+            --main-color-dark: #004d99; /* メインカラーの暗め */
+            --accent-color: #ff6600; /* アクセントカラー：活力を感じさせるオレンジ */
+            --accent-color-light: #ff8533; /* アクセントカラーの明るめ */
+            --bg-color: #f7f9fc; /* 背景色：薄い青みがかった白 */
+            --text-color: #333333; /* 文字色：ダークグレー */
+            --text-light: #666666; /* 薄めの文字色 */
+            --white: #ffffff; /* 白 */
+            --gray-light: #eeeeee; /* 薄いグレー */
+            --gray: #bbbbbb; /* グレー */
+            --border-color: #dddddd; /* ボーダー色 */
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* 基本シャドウ */
+            --transition: all 0.3s ease; /* 基本トランジション */
+        }
+        
+        html {
+            scroll-behavior: smooth; /* スムーズスクロール */
+            font-size: 62.5%; /* 10px = 1rem */
+        }
+        
+        body {
+            font-family: 'Noto Sans JP', sans-serif;
+            font-size: 1.6rem;
+            line-height: 1.7;
+            color: var(--text-color);
+            background-color: var(--bg-color);
+            overflow-x: hidden;
+        }
+        
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        a {
+            color: var(--main-color);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        
+        a:hover {
+            color: var(--main-color-dark);
+        }
+        
+        /* コンテナ */
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
+        /* ヘッダー */
+        header {
+            background-color: var(--white);
+            box-shadow: var(--shadow);
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 8rem;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo img {
+            width: 192px;
+            height: 40px;
+        }
+        
+        .logo-text {
+            font-size: 2.4rem;
+            font-weight: 700;
+            color: var(--main-color);
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 3rem;
+        }
+        
+        .nav-links a {
+            font-weight: 500;
+            font-size: 1.6rem;
+            color: var(--text-color);
+            transition: var(--transition);
+        }
+        
+        .nav-links a:hover {
+            color: var(--accent-color);
+        }
+        
+        .cta-button {
+            background-color: var(--accent-color);
+            color: var(--white);
+            padding: 1.4rem 2.8rem; /* 大きめのパディングでボタンサイズアップ */
+            border-radius: 5px;
+            font-weight: 700;
+            font-size: 2.2rem; /* フォントサイズを大きく */
+            transition: var(--transition);
+        }
+
+
+        .cta-button-larger {
+            text-align: center;
+            margin: 2rem 0;
+        }
+
+        .cta-button:hover {
+            background-color: var(--accent-color-light);
+            color: var(--white);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+        }
+        
+        /* ハンバーガーメニュー */
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            background: none;
+            border: none;
+            font-size: 2.4rem;
+            color: var(--main-color);
+        }
+        
+        /* ヒーローセクション */
+        .hero {
+            padding: 14rem 0 8rem;
+            background: linear-gradient(135deg, #f0f7ff 0%, #e5f1ff 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-container {
+            display: flex;
+            align-items: center;
+        }
+        
+        .hero-content {
+            flex: 1;
+            padding-right: 4rem;
+        }
+        
+        .hero-title {
+            font-size: 4.2rem;
+            font-weight: 700;
+            color: var(--main-color-dark);
+            line-height: 1.2;
+            margin-bottom: 2rem;
+        }
+        
+        .hero-subtitle {
+            font-size: 2.4rem;
+            font-weight: 500;
+            color: var(--accent-color);
+            margin-bottom: 2rem;
+        }
+        
+        .hero-description {
+            font-size: 1.8rem;
+            margin-bottom: 3rem;
+            color: var(--text-light);
+        }
+        
+        .hero-image {
+            flex: 1;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .image-placeholder {
+            width: 100%;
+            background-color: var(--gray-light);
+            border: 2px dashed var(--gray);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--text-light);
+            font-size: 1.4rem;
+            line-height: 1.4;
+            padding: 2rem;
+        }
+        
+        .small-image-placeholder {
+            width: 6rem;
+            height: 6rem;
+            border-radius: 50%;
+            background-color: var(--gray-light);
+            border: 2px dashed var(--gray);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            color: var(--text-light);
+            margin-right: 1.5rem;
+        }
+
+        /* 問題点セクション */
+        .problems {
+            padding: 8rem 0;
+            background-color: var(--white);
+        }
+        
+        .section-title {
+            font-size: 3.2rem;
+            font-weight: 700;
+            color: var(--main-color);
+            text-align: center;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 4px;
+            background-color: var(--accent-color);
+            margin: 1.5rem auto 0;
+        }
+        
+        .section-subtitle {
+            font-size: 1.8rem;
+            text-align: center;
+            margin-bottom: 5rem;
+            color: var(--text-light);
+        }
+        
+        .problems-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 3rem;
+            margin-top: 5rem;
+        }
+        
+        .problem-card {
+            text-align: center; /* 追加 */
+            background-color: var(--white);
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+            padding: 3rem;
+            transition: var(--transition);
+            border-top: 4px solid var(--main-color);
+        }
+        
+        .problem-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
+        }
+        
+        .problem-icon {
+            font-size: 3.6rem;
+            color: var(--accent-color);
+            margin-bottom: 2rem;
+        }
+        
+        .problem-title {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: var(--main-color-dark);
+        }
+        
+        .problem-description {
+            color: var(--text-light);
+        }
+        
+        /* 法改正セクション */
+        .legal-change {
+            padding: 8rem 0;
+            background: linear-gradient(to right, #f0f7ff, #e5f1ff);
+        }
+        
+        .legal-content {
+            display: flex;
+            align-items: center;
+            gap: 5rem;
+        }
+        
+        .legal-text {
+            flex: 1;
+        }
+        
+        .legal-title {
+            font-size: 2.8rem;
+            font-weight: 700;
+            color: var(--main-color-dark);
+            margin-bottom: 2rem;
+        }
+        
+        .legal-point {
+            margin-bottom: 2.5rem;
+        }
+        
+        .legal-point-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--accent-color);
+            margin-bottom: 1rem;
+        }
+        
+        .legal-image {
+            flex: 1;
+        }
+        
+        /* 機能紹介セクション */
+        .features {
+            padding: 8rem 0;
+            background-color: var(--white);
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 4rem;
+            margin-top: 5rem;
+        }
+        
+        .feature-card {
+            display: flex;
+            background-color: var(--white);
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            transition: var(--transition);
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
+        }
+        
+        .feature-icon {
+            width: 30%;
+            background-color: var(--main-color);
+            color: var(--white);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3.6rem;
+            padding: 2rem;
+        }
+        
+        .feature-content {
+            width: 70%;
+            padding: 2.5rem;
+        }
+        
+        .feature-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--main-color-dark);
+            margin-bottom: 1.5rem;
+        }
+        
+        .feature-description {
+            color: var(--text-light);
+            font-size: 1.5rem;
+        }
+        
+        /* 選ぶ理由セクション */
+        .reasons {
+            padding: 8rem 0;
+            background: linear-gradient(135deg, #f0f7ff 0%, #e5f1ff 100%);
+        }
+        
+        .reasons-cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 3rem;
+            margin-top: 5rem;
+        }
+        
+        .reason-card {
+            background-color: var(--white);
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+            padding: 4rem 3rem;
+            text-align: center;
+            transition: var(--transition);
+        }
+        
+        .reason-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
+        }
+        
+        .reason-icon {
+            font-size: 4.8rem;
+            color: var(--main-color);
+            margin-bottom: 2rem;
+        }
+        
+        .reason-title {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: var(--main-color-dark);
+            margin-bottom: 1.5rem;
+        }
+        
+        .reason-description {
+            color: var(--text-light);
+        }
+        
+        /* 料金セクション */
+        .pricing {
+            padding: 8rem 0;
+            background-color: var(--white);
+        }
+        
+        .pricing-card {
+            max-width: 80rem;
+            margin: 5rem auto 0;
+            background-color: var(--white);
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+            padding: 4rem;
+            text-align: center;
+            transition: var(--transition);
+            border: 2px solid var(--main-color);
+        }
+        
+        .pricing-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
+        }
+        
+        .pricing-tag {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--white);
+            background-color: var(--accent-color);
+            padding: 0.8rem 2rem;
+            border-radius: 30px;
+            display: inline-block;
+            margin-bottom: 2rem;
+        }
+        
+        .pricing-price {
+            font-size: 4.8rem;
+            font-weight: 700;
+            color: var(--main-color);
+            margin-bottom: 2rem;
+        }
+        
+        .pricing-price span {
+            font-size: 2rem;
+            color: var(--text-light);
+        }
+        
+        .pricing-features {
+            margin-bottom: 3rem;
+        }
+        
+        .pricing-feature {
+            font-size: 1.6rem;
+            margin-bottom: 1rem;
+            color: var(--text-light);
+        }
+        
+        .pricing-feature i {
+            color: var(--accent-color);
+            margin-right: 1rem;
+        }
+        
+        .pricing-comparison {
+            margin-top: 4rem;
+            padding: 3rem;
+            background-color: var(--bg-color);
+            border-radius: 8px;
+            text-align: left;
+        }
+        
+        .pricing-comparison-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--main-color-dark);
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+        
+        .comparison-item {
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+        }
+        
+        .comparison-item i {
+            color: var(--accent-color);
+            margin-right: 1rem;
+        }
+        
+        .pricing-highlight {
+            margin-top: 3rem;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--main-color-dark);
+        }
+
+        .annual-price {
+            font-size: 1.8rem;
+            color: var(--text-light);
+            margin-top: 0.5rem;
+            font-weight: 500;
+        }
+        
+        /* 顧客の声セクション */
+        .testimonials {
+            padding: 8rem 0;
+            background: linear-gradient(135deg, #f0f7ff 0%, #e5f1ff 100%);
+        }
+        
+        .testimonial-cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 3rem;
+            margin-top: 5rem;
+        }
+        
+        .testimonial-card {
+            background-color: var(--white);
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+            padding: 3rem;
+            transition: var(--transition);
+            position: relative;
+        }
+        
+        .testimonial-card::before {
+            content: '\201C';
+            font-size: 8rem;
+            color: var(--main-color);
+            opacity: 0.2;
+            position: absolute;
+            top: 2rem;
+            left: 2rem;
+            line-height: 1;
+            font-family: serif;
+        }
+        
+        .testimonial-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
+        }
+        
+        .testimonial-text {
+            font-size: 1.6rem;
+            margin-bottom: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+        }
+        
+        .testimonial-author-info {
+            flex: 1;
+        }
+        
+        .testimonial-author-name {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--main-color-dark);
+        }
+        
+        .testimonial-author-title {
+            font-size: 1.4rem;
+            color: var(--text-light);
+        }
+        
+        /* お問い合わせセクション */
+        .contact {
+            padding: 8rem 0;
+            background-color: var(--white);
+        }
+        
+        .cta-button-large {
+            text-align: center;
+            margin-top: 5rem;
+        }
+        
+        .cta-button-large .cta-button {
+            padding: 2rem 4rem;
+            font-size: 2.4rem;
+            font-weight: 700;
+        }
+        
+        /* フッター */
+        footer {
+            background-color: var(--main-color-dark);
+            color: var(--white);
+            padding: 5rem 0 2rem;
+        }
+        
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 4rem;
+            margin-bottom: 5rem;
+        }
+        
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+        
+        .footer-logo-text {
+            font-size: 2.4rem;
+            font-weight: 700;
+            color: var(--white);
+        }
+        
+        .footer-description {
+            margin-bottom: 2rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        .footer-social {
+            display: flex;
+            gap: 1.5rem;
+        }
+        
+        .footer-social a {
+            color: var(--white);
+            font-size: 2rem;
+            transition: var(--transition);
+        }
+        
+        .footer-social a:hover {
+            color: var(--accent-color);
+            transform: translateY(-2px);
+        }
+        
+        .footer-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 2rem;
+            color: var(--white);
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 1rem;
+        }
+        
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 1.5rem;
+            transition: var(--transition);
+        }
+        
+        .footer-links a:hover {
+            color: var(--white);
+            padding-left: 0.5rem;
+        }
+        
+        .footer-contact {
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .footer-contact i {
+            color: var(--accent-color);
+            font-size: 1.8rem;
+            margin-right: 1rem;
+        }
+        
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 2rem;
+            text-align: center;
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 1.4rem;
+        }
+        
+        /* アニメーション用クラス */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* レスポンシブ設定 */
+        @media (max-width: 1200px) {
+            html {
+                font-size: 60%;
+            }
+            
+            .problems-grid, 
+            .features-grid,
+            .reasons-cards,
+            .testimonial-cards {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            html {
+                font-size: 58%;
+            }
+            
+            .header-container {
+                height: 7rem;
+            }
+            
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 7rem;
+                left: 0;
+                width: 100%;
+                background-color: var(--white);
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+                flex-direction: column;
+                padding: 2rem;
+            }
+            
+            .nav-links.active {
+                display: flex;
+            }
+            
+            .nav-links li {
+                margin: 1.5rem 0;
+            }
+            
+            .hamburger {
+                display: block;
+            }
+            
+            .hero-container {
+                flex-direction: column;
+            }
+            
+            .hero-content {
+                padding-right: 0;
+                margin-bottom: 4rem;
+                text-align: center;
+            }
+            
+            .legal-content {
+                flex-direction: column;
+                gap: 3rem;
+            }
+            
+            .legal-image {
+                order: -1;
+            }
+            
+            .problems-grid, 
+            .features-grid,
+            .reasons-cards,
+            .testimonial-cards {
+                grid-template-columns: 1fr;
+            }
+            
+            .feature-card {
+                flex-direction: column;
+            }
+            
+            .feature-icon {
+                width: 100%;
+                padding: 3rem 0;
+            }
+            
+            .feature-content {
+                width: 100%;
+            }
+            
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            html {
+                font-size: 55%;
+            }
+            
+            .hero {
+                padding: 12rem 0 6rem;
+            }
+            
+            .section-title {
+                font-size: 2.8rem;
+            }
+            
+            .pricing-card {
+                padding: 3rem 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- ヘッダー -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <a href="/">
+                    <img src="https://gempo.info/common/logo.svg" alt="現場ポケットロゴ" width="192" height="40">
+                </a>
+            </div>
+            
+            <button class="hamburger" id="hamburger">
+                <i class="fas fa-bars"></i>
+            </button>
+            
+            <ul class="nav-links" id="nav-links">
+                <li><a href="#features">機能紹介</a></li>
+                <li><a href="#pricing">料金プラン</a></li>
+                <li><a href="#testimonials">導入事例</a></li>
+                <li><a href="#contact" class="cta-button">無料デモを試す</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- ヒーローセクション -->
+    <section class="hero" id="hero">
+        <div class="container hero-container">
+            <div class="hero-content fade-in visible">
+                <h1 class="hero-title">労働時間と給与管理の手間、これで解決！</h1>
+                <h2 class="hero-subtitle">煩雑な労働時間と給与管理、もっとラクにできないかお悩みの皆様へ。</h2>
+                <p class="hero-description">現場ポケットの勤怠管理機能で、2024年4月からの労働時間管理も対応できます。労働時間の正確な把握から、法令遵守のチェック、給与計算まで面倒な作業をスマートに一元管理。給与計算の手間や法令対応の不安が無くなります。</p>
+                <a href="#contact" class="cta-button">無料デモを試す</a>
+            </div>
+            <div class="hero-image fade-in visible">
+                <img src="mv02.jpg" alt="経営者がPCで作業時間と給与計算の確認をしている様子" width="600" height="400">
+            </div>
+            
+        </div>
+    </section>
+
+    <!-- 問題点セクション -->
+    <section class="problems" id="problems">
+        <div class="container">
+            <h2 class="section-title fade-in visible">現場の時間管理、こんな悩みありませんか？</h2>
+            <p class="section-subtitle fade-in">多くの経営者様が抱える「現場の時間管理」に関する課題を解決します</p>
+            
+            <div class="problems-grid">
+                <div class="problem-card fade-in">
+                    <div class="problem-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <h3 class="problem-title">打刻忘れが多い</h3>
+                    <p class="problem-description">現場では打刻忘れが頻発し、正確な労働時間の記録が難しい状況です。結果として労務管理が不十分になり、法令遵守も難しくなっています。</p>
+                </div>
+                
+                <div class="problem-card fade-in">
+                    <div class="problem-icon">
+                        <i class="fas fa-eye-slash"></i>
+                    </div>
+                    <h3 class="problem-title">現場状況が見えない</h3>
+                    <p class="problem-description">リアルタイムで現場の状況を把握できず、効率的な人員配置や作業指示が困難になっています。特に複数現場を管理する場合、状況把握に時間がかかります。</p>
+                </div>
+                
+                <div class="problem-card fade-in">
+                    <div class="problem-icon">
+                        <i class="fas fa-exclamation-triangle"></i>
+                    </div>
+                    <h3 class="problem-title">労働時間規制の対応が難しい</h3>
+                    <p class="problem-description">労働時間の上限規制やスケジュール調整、法律対応など、複雑な管理業務に追われ、本来の経営業務に集中できない状況が続いています。</p>
+                </div>
+                
+                <div class="problem-card fade-in">
+                    <div class="problem-icon">
+                        <i class="fas fa-coins"></i>
+                    </div>
+                    <h3 class="problem-title">給与計算が手間</h3>
+                    <p class="problem-description">毎月の給与計算に多くの時間と労力を費やしてミスも発生していませんか？特に残業代や休日出勤の計算は複雑で時間がかかります。</p>
+                </div>
+                
+                <div class="problem-card fade-in">
+                    <div class="problem-icon">
+                        <i class="fas fa-file-alt"></i>
+                    </div>
+                    <h3 class="problem-title">紙での管理が非効率</h3>
+                    <p class="problem-description">若手はスマホ世代。紙の管理では効率が落ちるだけでなく、保管や検索も手間がかかり、情報共有もスムーズにいきません。</p>
+                </div>
+                
+                <div class="problem-card fade-in">
+                    <div class="problem-icon">
+                        <i class="fas fa-balance-scale"></i>
+                    </div>
+                    <h3 class="problem-title">コンプライアンスリスク</h3>
+                    <p class="problem-description">不正確な労働時間管理は法令違反のリスクを高め、労働基準監督署の調査や罰則、さらには企業イメージの低下にもつながります。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 法改正セクション -->
+    <section class="legal-change" id="legal-change">
+        <div class="container">
+            <h2 class="section-title fade-in">2024年4月から建設業界でも従業員の労働時間の管理方法が変更に!</h2>
+            <p class="section-subtitle fade-in">労働基準法改正による影響と対応策</p>
+            
+            <div class="legal-content">
+                <div class="legal-text fade-in">
+                    <h3 class="legal-title">法改正の対応はできていますか？</h3>
+                    <p>2024年4月から、労働基準法が改正され、労働時間の管理のルールが大きく変わっています。対応が遅れると、「知らなかった」では済まされず、罰則リスクも発生します。</p>
+                    
+                    <div class="legal-point">
+                        <h4 class="legal-point-title">時間外労働の上限規制強化</h4>
+                        <p>月45時間、年360時間を原則とする時間外労働の上限規制が全業種に適用されます。違反した場合、6ヶ月以下の懲役または30万円以下の罰金が科される可能性があります。</p>
+                    </div>
+                    <div class="legal-point">
+                        <h4 class="legal-point-title">労働時間の客観的記録義務化</h4>
+                        <p>タイムカードやICカード、PCログなど、客観的な方法による労働時間の記録が義務付けられます。自己申告だけでは不十分とされ、より厳格な管理が求められます。</p>
+                    </div>
+                    
+                    <p><strong>これまでの管理体制で、上記の対応ができていますか？</strong></p>
+                </div>
+                
+                <div class="legal-image fade-in">
+                    <img src="803522834.jpg" alt="法改正に関するイメージ" width="500" height="350">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 機能紹介セクション -->
+    <section class="features" id="features">
+        <div class="container">
+            <h2 class="section-title fade-in">現場ポケットが時間管理と給与計算の悩みを解決！</h2>
+            <p class="section-subtitle fade-in">スマホで労働時間も法律対応も給与も管理。</p>
+            
+            <div class="features-grid">
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <div class="feature-content">
+                        <h3 class="feature-title">スマホで簡単打刻</h3>
+                        <p class="feature-description">現場のスマホからワンタップで勤怠打刻が可能。出勤・退勤時間を自動で記録し、打刻忘れを防ぐアラート機能も搭載。GPS位置情報と連動して、正確な現場の労働時間を記録します。</p>
+                    </div>
+                </div>
+                
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">
+                        <i class="fas fa-coffee"></i>
+                    </div>
+                    <div class="feature-content">
+                        <h3 class="feature-title">休憩時間記録</h3>
+                        <p class="feature-description">複数回の休憩を簡単に記録でき、自動で正確な実労働時間を計算します。</p>
+                    </div>
+                </div>
+                
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <div class="feature-content">
+                        <h3 class="feature-title">労働時間の可視化</h3>
+                        <p class="feature-description">労働時間や残業時間を分かりやすく表示。リアルタイムで各従業員や現場の労働状況を把握できるため、過剰労働の防止や効率的な人員配置が可能になります。</p>
+                    </div>
+                </div>
+                
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">
+                        <i class="fas fa-file-contract"></i>
+                    </div>
+                    <div class="feature-content">
+                        <h3 class="feature-title">36協定管理</h3>
+                        <p class="feature-description">36協定の上限時間を設定すると、従業員がその時間に近づいた際に自動通知。違反を未然に防止し、法令遵守を支援します。</p>
+                    </div>
+                </div>
+                
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">
+                        <i class="fas fa-gavel"></i>
+                    </div>
+                    <div class="feature-content">
+                        <h3 class="feature-title">法改正対応</h3>
+                        <p class="feature-description">2024年4月の改正労働基準法にも完全対応。システムは法改正に合わせてアップデートされるので、常に最新の法令に準拠した労務管理が可能です。</p>
+                    </div>
+                </div>
+                
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">
+                        <i class="fas fa-print"></i>
+                    </div>
+                    <div class="feature-content">
+                        <h3 class="feature-title">帳票出力</h3>
+                        <p class="feature-description">労働基準法で定められた各種帳票や記録をボタン一つで出力可能。労働基準監督署の調査にも即座に対応できるよう、必要な書類を常に最新の状態で準備します。</p>
+                    </div>
+                </div>
+                
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">
+                        <i class="fas fa-calculator"></i>
+                    </div>
+                    <div class="feature-content">
+                        <h3 class="feature-title">簡単給与計算</h3>
+                        <p class="feature-description">打刻データから自動で給与計算が可能。残業代、深夜手当、休日出勤手当なども自動計算し、給与の計算も簡単に行えます。給与計算の時間を大幅に削減し、ミスも防止します。</p>
+                    </div>
+                </div>
+                
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">
+                        <i class="fas fa-tablet-alt"></i>
+                    </div>
+                    <div class="feature-content">
+                        <h3 class="feature-title">モバイル対応</h3>
+                        <p class="feature-description">スマートフォンやタブレットからも閲覧可能。多忙な経営者の方でも外出先から打刻状況の確認が迅速に行えます。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 選ぶ理由セクション -->
+    <section class="reasons" id="reasons">
+        <div class="container">
+            <h2 class="section-title fade-in">現場ポケットを選ぶ3つの理由</h2>
+            
+            <div class="reasons-cards">
+                <div class="reason-card fade-in">
+                    <div class="reason-icon">
+                        <i class="fas fa-rocket"></i>
+                    </div>
+                    <h3 class="reason-title">簡単導入・すぐに使える</h3>
+                    <p class="reason-description">専用機器の購入や複雑な設定は不要。アプリをダウンロードするだけですぐに利用開始できます。現場スタッフも直感的に操作できるシンプルなインターフェースで、導入研修も最小限で済みます。</p>
+                </div>
+                
+                <div class="reason-card fade-in">
+                    <div class="reason-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3 class="reason-title">法律遵守の負担を軽減</h3>
+                    <p class="reason-description">労働時間管理に関する法律を自動でチェック。法令違反のリスクを未然に防ぎ、コンプライアンス体制を強化します。定期的なアップデートで常に最新の法令に対応し、経営者の法的リスクを軽減します。</p>
+                </div>
+                
+                <div class="reason-card fade-in">
+                    <div class="reason-icon">
+                        <i class="fas fa-hourglass-half"></i>
+                    </div>
+                    <h3 class="reason-title">時間とコストの大幅削減</h3>
+                    <p class="reason-description">勤怠管理から給与計算までの一連の作業を自動化することで、管理業務にかかる時間を削減。人的ミスも防止し、本来の経営業務や事業拡大に集中できる環境を実現します。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 料金セクション -->
+    <section class="pricing" id="pricing">
+        <div class="container">
+            <h2 class="section-title fade-in">価格プラン</h2>
+            <p class="section-subtitle fade-in">ユーザー数無制限で月額換算5,000円の勤怠・給与管理</p>
+            <div class="pricing-card fade-in">
+                <div class="pricing-tag">現場ポケット 勤怠管理機能</div>
+                <div class="pricing-price">
+                    5,000<span>円/月換算（税別）</span>
+                    <div class="annual-price">年間契約 60,000円（税別）</div>
+                  </div>
+                <div class="pricing-features">
+                    <div class="pricing-feature"><i class="fas fa-check-circle"></i>勤怠管理＋給与計算 一体型</div>
+                    <div class="pricing-feature"><i class="fas fa-check-circle"></i>ユーザー数無制限</div>
+                    <div class="pricing-feature"><i class="fas fa-check-circle"></i>データ容量無制限</div>
+                    <div class="pricing-feature"><i class="fas fa-check-circle"></i>初期費用0円</div>
+                    <div class="pricing-feature"><i class="fas fa-check-circle"></i>サポート対応無料</div>
+                </div>
+                
+                <a href="#contact" class="cta-button">無料デモを試す</a>
+                
+                <div class="pricing-comparison">
+                    <h4 class="pricing-comparison-title">競合サービスとの比較</h4>
+                    <p>多くの勤怠管理・給与計算システムでは、以下のような課題があります。</p>
+                    <div class="comparison-item"><i class="fas fa-times-circle"></i>高額な初期費用：導入時に10万円以上かかるケースも</div>
+                    <div class="comparison-item"><i class="fas fa-times-circle"></i>ユーザー単位の課金：1人あたり200円～800円の月額費用が発生</div>
+                    <div class="comparison-item"><i class="fas fa-times-circle"></i>最低利用料金の設定：少人数でも最低2,000円～の固定費が必要</div>
+                    <div class="comparison-item"><i class="fas fa-times-circle"></i>別々のシステム導入が必要：勤怠と給与で別々のシステムを導入する手間とコスト</div>
+                    
+                    <div class="pricing-highlight">
+                        現場ポケットなら、これらの課題をすべて解決！<br>
+                        初期費用0円 / ユーザー数無制限 / 月額換算たった5,000円の定額制 / 勤怠管理と給与計算が一体化
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 顧客の声セクション -->
+    <section class="testimonials" id="testimonials">
+        <div class="container">
+            <h2 class="section-title fade-in">先行でご利用頂いた経営者様の声</h2>
+            <p class="section-subtitle fade-in">現場ポケットを導入した企業からの声をご紹介します</p>
+            
+            <div class="testimonial-cards">
+                <div class="testimonial-card fade-in">
+                    <p class="testimonial-text">「現場ポケットを導入して、労働時間の管理が格段に楽になりました。以前は打刻忘れや記録漏れが多かったのですが、今ではスマホ通知で打刻忘れがなくなり、労働時間の記録が正確になりました。さらに給与計算も簡単になり、月末の事務作業時間が70%も削減できました！」</p>
+                    <div class="testimonial-author">
+                        <div class="small-image-placeholder">
+                            写真
+                        </div>
+                        <div class="testimonial-author-info">
+                            <div class="testimonial-author-name">山田 太郎 様</div>
+                            <div class="testimonial-author-title">〇〇建設株式会社 代表取締役</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card fade-in">
+                    <p class="testimonial-text">「法改正への対応が不安でしたが、現場ポケットのおかげで安心して事業に集中できています。36協定の自動管理機能が特に助かっており、労働基準監督署の調査にも即座に対応できるようになりました。経営者として、コンプライアンスが守られていることの安心感は計り知れません。」</p>
+                    <div class="testimonial-author">
+                        <div class="small-image-placeholder">
+                            写真
+                        </div>
+                        <div class="testimonial-author-info">
+                            <div class="testimonial-author-name">佐藤 健二 様</div>
+                            <div class="testimonial-author-title">△△工務店 代表取締役</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card fade-in">
+                    <p class="testimonial-text">「複数の現場を管理していますが、以前は各現場の状況把握に時間がかかっていました。現場ポケットを導入してからは、リアルタイムで全現場の状況が確認でき、効率的な人員配置が可能になりました。また、給与計算の正確性が向上し、従業員からの信頼も高まっています。」</p>
+                    <div class="testimonial-author">
+                        <div class="small-image-placeholder">
+                            写真
+                        </div>
+                        <div class="testimonial-author-info">
+                            <div class="testimonial-author-name">鈴木 美香 様</div>
+                            <div class="testimonial-author-title">□□製作所 専務取締役</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- お問い合わせセクション -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <h2 class="section-title fade-in">無料で利用してみる</h2>
+            <p class="section-subtitle fade-in">まずは無料デモをお試しください。専門スタッフが丁寧にご説明します。</p>
+            
+            <div class="cta-button-larger fade-in">
+                <a href="https://gempo.info/request" class="cta-button">無料デモを申し込む</a>
+            </div>
+        </div>
+    </section>
+    
+
+    <!-- フッター -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-info">
+                    <div class="footer-logo">
+                        <div class="footer-logo-text">現場ポケット</div>
+                    </div>
+                    <p class="footer-description">塗装業に特化した勤怠管理・給与計算システム。スマホで簡単打刻、労働時間の正確な記録、法令対応、給与計算の自動化までをワンストップで実現します。</p>
+                    <div class="footer-social">
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-links-section">
+                    <h3 class="footer-title">サービス</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">勤怠管理機能</a></li>
+                        <li><a href="#">給与計算機能</a></li>
+                        <li><a href="#">法令遵守支援</a></li>
+                        <li><a href="#">導入事例</a></li>
+                        <li><a href="#">料金プラン</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-links-section">
+                    <h3 class="footer-title">企業情報</h3>
+                    <ul class="footer-links">
+                        <li><a href="https://gempo.info/company">会社概要</a></li>
+                        <li><a href="https://gempo.info/privacy">プライバシーポリシー</a></li>
+                        <li><a href="https://gempo.info/ordercontract">特定商取引法に基づく表記</a></li>
+                        <li><a href="https://gempo.info/request">お問い合わせ</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-contact-section">
+                    <h3 class="footer-title">お問い合わせ</h3>
+                    <div class="footer-contact">
+                        <i class="fas fa-phone"></i>
+                        <span>092-431-1301（平日9:00-18:00）</span>
+                    </div>
+                    <div class="footer-contact">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>福岡市博多区博多駅東3-14-1 T-Building HAKATA EAST 9F</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>© 2025 現場ポケット All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // ハンバーガーメニューの動作
+        document.addEventListener('DOMContentLoaded', function() {
+            const hamburger = document.getElementById('hamburger');
+            const navLinks = document.getElementById('nav-links');
+            
+            hamburger.addEventListener('click', function() {
+                navLinks.classList.toggle('active');
+                
+                // ハンバーガーアイコンの切り替え
+                const icon = hamburger.querySelector('i');
+                if (icon.classList.contains('fa-bars')) {
+                    icon.classList.remove('fa-bars');
+                    icon.classList.add('fa-times');
+                } else {
+                    icon.classList.remove('fa-times');
+                    icon.classList.add('fa-bars');
+                }
+            });
+            
+            // ナビゲーションリンクをクリックしたらメニューを閉じる
+            const navItems = document.querySelectorAll('.nav-links a');
+            navItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    if (window.innerWidth <= 768) {
+                        navLinks.classList.remove('active');
+                        const icon = hamburger.querySelector('i');
+                        icon.classList.remove('fa-times');
+                        icon.classList.add('fa-bars');
+                    }
+                });
+            });
+            
+            // スクロールアニメーション
+            const fadeElements = document.querySelectorAll('.fade-in');
+            
+            function checkFade() {
+                fadeElements.forEach(element => {
+                    const elementTop = element.getBoundingClientRect().top;
+                    const windowHeight = window.innerHeight;
+                    
+                    if (elementTop < windowHeight * 0.9) {
+                        element.classList.add('visible');
+                    }
+                });
+            }
+            
+            // 初期チェック
+            checkFade();
+            
+            // スクロール時にチェック
+            window.addEventListener('scroll', checkFade);
+            
+            // フォーム送信処理
+            const demoForm = document.getElementById('demo-form');
+            
+            demoForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // ここに実際のフォーム送信処理を追加
+                alert('デモのお申し込みありがとうございます。担当者から折り返しご連絡いたします。');
+                demoForm.reset();
+            });
+        });
+    </script>
+
+
+
+            <script></script>
+        
+    
+</body>
