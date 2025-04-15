@@ -340,7 +340,7 @@
         }
         
         .problem-title {
-            font-size: 2rem;
+            font-size: 3rem;
             font-weight: 700;
             margin-bottom: 1.5rem;
             color: var(--main-color-dark);
@@ -358,19 +358,28 @@
         
         .legal-content {
             display: flex;
-            align-items: center;
+            flex-direction: row;
+            align-items: flex-start;
             gap: 5rem;
+            margin-bottom: 3rem;
         }
         
         .legal-text {
             flex: 1;
+            max-width: 800px;
+        }
+        
+        .legal-image {
+            flex: 1;
+            max-width: 500px;
         }
         
         .legal-title {
             font-size: 2.8rem;
             font-weight: 700;
-            color: var(--main-color-dark);
+            color: var(--accent-color);
             margin-bottom: 2rem;
+            text-align: left;
         }
         
         .legal-point {
@@ -384,8 +393,16 @@
             margin-bottom: 1rem;
         }
         
-        .legal-image {
-            flex: 1;
+        .legal-question-container {
+            width: 100%;
+            text-align: center;
+            margin: 3rem 0;
+        }
+        
+        .legal-question {
+            font-size: 3.36rem;
+            color: var(--main-color-dark);
+            display: inline-block;
         }
         
         /* 機能紹介セクション */
@@ -432,7 +449,7 @@
         }
         
         .feature-title {
-            font-size: 1.8rem;
+            font-size: 2.7rem;
             font-weight: 700;
             color: var(--main-color-dark);
             margin-bottom: 1.5rem;
@@ -477,7 +494,7 @@
         }
         
         .reason-title {
-            font-size: 2.2rem;
+            font-size: 2.64rem;
             font-weight: 700;
             color: var(--main-color-dark);
             margin-bottom: 1.5rem;
@@ -550,35 +567,72 @@
         
         .pricing-comparison {
             margin-top: 4rem;
-            padding: 3rem;
-            background-color: var(--bg-color);
-            border-radius: 8px;
+            padding: 4rem;
+            background: linear-gradient(135deg, #f8f9ff 0%, #f0f5ff 100%);
+            border-radius: 12px;
             text-align: left;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            border: 1px solid rgba(0, 102, 204, 0.1);
         }
         
         .pricing-comparison-title {
-            font-size: 2rem;
+            font-size: 2.4rem;
             font-weight: 700;
             color: var(--main-color-dark);
-            margin-bottom: 2rem;
+            margin-bottom: 3rem;
             text-align: center;
+            position: relative;
+            padding-bottom: 1.5rem;
+        }
+        
+        .pricing-comparison-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent-color) 0%, var(--accent-color-light) 100%);
+            border-radius: 2px;
         }
         
         .comparison-item {
-            margin-bottom: 1.5rem;
-            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            font-size: 1.6rem;
+            padding: 1.5rem 2rem;
+            background-color: var(--white);
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            align-items: center;
+        }
+        
+        .comparison-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
         }
         
         .comparison-item i {
             color: var(--accent-color);
-            margin-right: 1rem;
+            margin-right: 1.5rem;
+            font-size: 1.8rem;
+            width: 24px;
+            text-align: center;
         }
         
         .pricing-highlight {
-            margin-top: 3rem;
-            font-size: 1.8rem;
+            margin-top: 4rem;
+            font-size: 2rem;
             font-weight: 700;
             color: var(--main-color-dark);
+            text-align: center;
+            padding: 2rem;
+            background: linear-gradient(135deg, var(--main-color) 0%, var(--main-color-dark) 100%);
+            color: var(--white);
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
         }
 
         .annual-price {
@@ -991,12 +1045,15 @@
     <!-- 法改正セクション -->
     <section class="legal-change" id="legal-change">
         <div class="container">
-            <h2 class="section-title fade-in">2024年4月から建設業界でも従業員の労働時間の管理方法が変更に!</h2>
-            <p class="section-subtitle fade-in">労働基準法改正による影響と対応策</p>
+            <h2 class="section-title fade-in">2024年4月から建設業界でも<br>従業員の労働時間の管理方法が変更に!</h2>
             
             <div class="legal-content">
+                <div class="legal-image fade-in">
+                    <img src="803522834.jpg" alt="法改正に関するイメージ" width="500" height="350">
+                </div>
+                
                 <div class="legal-text fade-in">
-                    <h3 class="legal-title">法改正の対応はできていますか？</h3>
+                    <h3 class="legal-title">「知らなかった」では済まない！法改正の対応</h3>
                     <p>2024年4月から、労働基準法が改正され、労働時間の管理のルールが大きく変わっています。対応が遅れると、「知らなかった」では済まされず、罰則リスクも発生します。</p>
                     
                     <div class="legal-point">
@@ -1007,13 +1064,11 @@
                         <h4 class="legal-point-title">労働時間の客観的記録義務化</h4>
                         <p>タイムカードやICカード、PCログなど、客観的な方法による労働時間の記録が義務付けられます。自己申告だけでは不十分とされ、より厳格な管理が求められます。</p>
                     </div>
-                    
-                    <p><strong>これまでの管理体制で、上記の対応ができていますか？</strong></p>
                 </div>
-                
-                <div class="legal-image fade-in">
-                    <img src="803522834.jpg" alt="法改正に関するイメージ" width="500" height="350">
-                </div>
+            </div>
+            
+            <div class="legal-question-container">
+                <p class="legal-question"><strong>これまでの管理体制で、上記の対応ができていますか？</strong></p>
             </div>
         </div>
     </section>
