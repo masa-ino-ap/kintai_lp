@@ -176,30 +176,40 @@
         
         /* ヒーローセクション */
         .hero {
+            position: relative;
             padding: 16rem 0 10rem;
             background: linear-gradient(135deg, #f0f7ff 0%, #e5f1ff 100%);
-            position: relative;
             overflow: hidden;
         }
-        
+        .hero.bg-image {
+            background: linear-gradient(135deg, rgba(240,247,255,0.7) 0%, rgba(229,241,255,0.7) 100%), url('mv02.jpg') center/cover no-repeat;
+        }
         .hero-container {
+            position: relative;
+            z-index: 2;
             display: flex;
+            flex-direction: column;
             align-items: center;
-            gap: 4rem;
         }
-        
+        .hero-image { display: none; }
         .hero-content {
-            flex: 1;
-            padding-right: 4rem;
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            padding-right: 0;
         }
-        
         .hero-title {
+            width: 100vw;
+            max-width: 100vw;
+            margin-left: calc(-50vw + 50%);
+            padding: 2rem 0;
+            text-align: center;
             font-size: 5.2rem;
             font-weight: 700;
             color: var(--main-color-dark);
             line-height: 1.2;
             margin-bottom: 2.5rem;
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
             background: linear-gradient(135deg, var(--main-color) 0%, var(--main-color-dark) 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -218,32 +228,6 @@
             margin-bottom: 4rem;
             color: var(--text-color);
             line-height: 1.8;
-        }
-        
-        .hero-image {
-            flex: 1;
-            position: relative;
-            z-index: 2;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
-            border-radius: 12px;
-            overflow: hidden;
-            transform: perspective(1000px) rotateY(-5deg);
-            transition: transform 0.3s ease;
-        }
-        
-        .hero-image:hover {
-            transform: perspective(1000px) rotateY(0deg);
-        }
-        
-        .hero-image img {
-            width: 100%;
-            height: auto;
-            display: block;
-            transition: transform 0.3s ease;
-        }
-        
-        .hero-image:hover img {
-            transform: scale(1.05);
         }
         
         .image-placeholder {
@@ -881,6 +865,11 @@
                 display: block;
             }
             
+            .hero-title {
+                font-size: 3.2rem;
+                padding: 1.5rem 0;
+            }
+            
             .hero-container {
                 flex-direction: column;
             }
@@ -973,13 +962,13 @@
         <div class="container hero-container">
             <div class="hero-content fade-in visible">
                 <h2 class="hero-subtitle">現場の労働時間と給与の管理にお悩みの方へ</h2>
-                <h1 class="hero-title">打刻忘れでヒヤリ」「36協定違反の不安」もう終わりにしませんか？<br>建設業の現場あるあるを、たったひとつのアプリで一気に解決！</h1>
+                <h1 class="hero-title">「打刻忘れでヒヤリ」「労働時間管理の不安」<br>もう終わりにしませんか？<br>現場のあるあるを、現場ポケットで一気に解決！</h1>
                 <p class="hero-description">現場ポケットの勤怠管理機能なら、2024年4月からの労働時間の管理に対応可能。労働時間の正確な把握から、法令遵守、給与計算まで面倒な作業を一元管理。給与計算の手間や法令対応の不安が無くなります。</p>
                 <a href="#contact" class="cta-button">無料デモを試す</a>
             </div>
-            <div class="hero-image fade-in visible">
+            <!-- <div class="hero-image fade-in visible">
                 <img src="mv02.jpg" alt="経営者がPCで作業時間と給与計算の確認をしている様子" width="600" height="400">
-            </div>
+            </div> -->
             
         </div>
     </section>
@@ -1455,9 +1444,9 @@
         });
     </script>
 
-
-
-            <script></script>
-        
-    
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        document.querySelector('.hero').classList.add('bg-image');
+      });
+    </script>
 </body>
