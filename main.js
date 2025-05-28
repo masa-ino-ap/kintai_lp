@@ -29,6 +29,34 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     });
+    // モーダル機能
+    const modal = document.getElementById('contractModal');
+    const openModalButtons = document.querySelectorAll('.cta-button:not(.screen-preview)');
+    const closeModal = document.querySelector('.close');
+
+    // モーダルを開く
+    openModalButtons.forEach(button => {
+        button.addEventListener('click', function(e) {
+            e.preventDefault();
+            modal.style.display = 'flex';
+            document.body.style.overflow = 'hidden'; // スクロールを無効化
+        });
+    });
+
+    // モーダルを閉じる
+    closeModal.addEventListener('click', function() {
+        modal.style.display = 'none';
+        document.body.style.overflow = 'auto'; // スクロールを有効化
+    });
+
+    // モーダルの外側をクリックしたら閉じる
+    window.addEventListener('click', function(e) {
+        if (e.target === modal) {
+            modal.style.display = 'none';
+            document.body.style.overflow = 'auto'; // スクロールを有効化
+        }
+    });
+
     // スクロールアニメーション
     const fadeElements = document.querySelectorAll('.fade-in');
     function checkFade() {
